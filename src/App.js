@@ -67,7 +67,7 @@ const App = () => {
                                 onChange={() => toggleCompleted(l.id)}
                             />
                             {l.completed ? (
-                                <button onClick={() => removeItem(l.id)}>delete</button>
+                                <DeleteButton onClick={() => removeItem(l.id)}>delete</DeleteButton>
                             ) : null}
                         </ListItem>
                     ))}
@@ -106,20 +106,19 @@ const ItemListContainer = styled(HeaderContainer)`
     border-radius: 10px;
     border: 1px solid black;
     width: 80%;
-
 `;
 
 const List = styled.ul`
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: space-between;
-`
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+`;
 
 const ListItem = styled.li`
-  padding: 5px;
-`
+    padding: 5px;
+`;
 
 const ListInput = styled.input`
     margin: 0 5px;
@@ -129,18 +128,32 @@ const ListInput = styled.input`
     font-size: 20px;
 `;
 
-const AddButton = styled.button`
+const Button = styled.button`
     padding: 3px 1em;
     border-radius: 5px;
     border: none;
     font-weight: bold;
+`;
+
+const AddButton = styled(Button)`
     background-color: #5283ba;
     color: #fefefe;
     transition: 500ms background-color, 500ms color;
-
     &:hover {
         color: #5283ba;
         background-color: #efefef;
+        cursor: pointer;
+    }
+`;
+
+const DeleteButton = styled(Button)`
+    background-color: #b8515b;
+    color: #fefefe;
+    transition: 500ms background-color, 500ms color;
+    margin: 0 5px;
+    &:hover {
+        color: #b8515b;
+        background-color: papayawhip;
         cursor: pointer;
     }
 `;
