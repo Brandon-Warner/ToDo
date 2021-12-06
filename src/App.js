@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const App = () => {
     const [listItem, setListItem] = useState('');
@@ -41,18 +42,24 @@ const App = () => {
     };
 
     return (
-        <div>
-            <h1>ToDo Checklist</h1>
+        <Container>
+            <HeaderContainer>
+                <h1>ToDo Checklist</h1>
+            </HeaderContainer>
 
-            <form onSubmit={submit}>
-                <input type='text' value={listItem} onChange={e => setListItem(e.target.value)} />
-                <button type='submit'>add item</button>
-            </form>
+            <Form onSubmit={submit}>
+                <ListInput
+                    type='text'
+                    value={listItem}
+                    onChange={e => setListItem(e.target.value)}
+                />
+                <AddButton type='submit'>add item</AddButton>
+            </Form>
 
-            <div>
-                <ul>
+            <ItemListContainer>
+                <List>
                     {list.map(l => (
-                        <li key={l.id}>
+                        <ListItem key={l.id}>
                             {l.content}
                             <input
                                 type='checkbox'
@@ -62,12 +69,80 @@ const App = () => {
                             {l.completed ? (
                                 <button onClick={() => removeItem(l.id)}>delete</button>
                             ) : null}
-                        </li>
+                        </ListItem>
                     ))}
-                </ul>
-            </div>
-        </div>
+                </List>
+            </ItemListContainer>
+        </Container>
     );
 };
+
+const Container = styled.div`
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: papayawhip;
+`;
+
+const HeaderContainer = styled.div`
+    text-align: center;
+    padding: 1em 0;
+`;
+
+const Form = styled.form`
+    margin: 0 auto;
+    padding: 1em;
+    width: 80%;
+    background-color: #efefef;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+`;
+
+const ItemListContainer = styled(HeaderContainer)`
+    margin: 0 auto;
+    padding: 1em;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 80%;
+
+`;
+
+const List = styled.ul`
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-between;
+`
+
+const ListItem = styled.li`
+  padding: 5px;
+`
+
+const ListInput = styled.input`
+    margin: 0 5px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 20px;
+`;
+
+const AddButton = styled.button`
+    padding: 3px 1em;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    background-color: #5283ba;
+    color: #fefefe;
+    transition: 500ms background-color, 500ms color;
+
+    &:hover {
+        color: #5283ba;
+        background-color: #efefef;
+        cursor: pointer;
+    }
+`;
 
 export default App;
