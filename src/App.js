@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const App = () => {
@@ -6,6 +6,9 @@ const App = () => {
     const [list, setList] = useState([]);
     console.log('listItem: ', listItem);
     console.log('list: ', list);
+
+    const textInput = useRef();
+    const focusTextInput = () => textInput.current.focus();
 
     const submit = e => {
         e.preventDefault();
@@ -51,9 +54,10 @@ const App = () => {
                 <ListInput
                     type='text'
                     value={listItem}
+                    ref={textInput}
                     onChange={e => setListItem(e.target.value)}
                 />
-                <AddButton type='submit'>add item</AddButton>
+                <AddButton type='submit' onClick={focusTextInput}>add item</AddButton>
             </Form>
 
             <ItemListContainer>
@@ -118,6 +122,7 @@ const List = styled.ul`
 
 const ListItem = styled.li`
     padding: 5px;
+    display: inline-block;
 `;
 
 const ListInput = styled.input`
