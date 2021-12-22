@@ -114,6 +114,7 @@ const ItemListContainer = styled(HeaderContainer)`
 
 const List = styled.ul`
     list-style-type: none;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
